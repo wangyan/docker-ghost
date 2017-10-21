@@ -7,7 +7,7 @@ if [ "$APT_MIRRORS" = "aliyun" ];then
     yarn config set registry https://registry.npm.taobao.org
 fi
 
-if [ "$MAIL" = "aliyun" ];then
+if [ "$MAIL" = "gmail" ];then
     ghost config --no-prompt \
         --url http://127.0.0.1:2368 \
         --port 2368 \
@@ -21,8 +21,24 @@ if [ "$MAIL" = "aliyun" ];then
         --mailport 465 && \
     ghost config paths.contentPath  $GHOST_CONTENT && \
     ghost config mail.from noreply@wangyan.org && \
-    ghost config mail.options.secureConnection true && \
-    ghost config mail.options.requiresAuth true
+    ghost config mail.options.secureConnection true
+fi
+
+if [ "$MAIL" = "aliyun" ];then
+    ghost config --no-prompt \
+        --url http://127.0.0.1:2368 \
+        --port 2368 \
+        --ip 0.0.0.0 \
+        --db sqlite3 \
+        --dbpath $GHOST_CONTENT/data/ghost.db \
+        --mail SMTP \
+        --mailuser noreply@dm.mail.wangyan.org \
+        --mailpass NoReply123 \
+        --mailhost smtpdm.aliyun.com \
+        --mailport 465 && \
+    ghost config paths.contentPath  $GHOST_CONTENT && \
+    ghost config mail.from noreply@dm.mail.wangyan.org && \
+    ghost config mail.options.secureConnection true
 fi
 
 mv $GHOST_INSTALL/content $GHOST_INSTALL/content.orig && \

@@ -4,6 +4,7 @@ LABEL authors="WangYan <i@wangyan.org>"
 # Setup Nginx
 RUN set -xe && \
     apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y curl wget unzip git net-tools ca-certificates --no-install-recommends && \
     curl -O "http://nginx.org/keys/nginx_signing.key" && \
     apt-key add nginx_signing.key && \
@@ -15,8 +16,7 @@ RUN set -xe && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak && \
-    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak && \
-    mkdir -p /var/www/html
+    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
