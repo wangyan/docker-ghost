@@ -14,8 +14,19 @@ GHOST: `1.1.3`
 docker run --restart=always --name ghost \
 -v /opt/ghost:/opt/ghost \
 -p 2368:2368 \
+-e MAIL=gmail \
 -d idiswy/ghost:latest
 ```
+
+```
+docker run --restart=always --name ghost \
+-v /opt/ghost:/opt/ghost \
+-p 2368:2368 \
+-e APT_MIRRORS=aliyun \
+-e MAIL=aliyun \
+-d daocloud.io/wangyan/ghost:latest
+```
+
 ## Ghost 版本升级
 
 ```
