@@ -1,7 +1,7 @@
 # DOCKER-GHOST
 
 Ubuntu: `16.04`  
-NodeJS: `6.11.4`
+NodeJS: `8.9.1`
 GHOST: `1.1.3`
 
 ## 快速开始
