@@ -81,7 +81,7 @@ VOLUME $GHOST_CONTENT
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN  chmod +x /docker-entrypoint.sh
 
-EXPOSE 2368 80 443
+EXPOSE 80
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 CMD ["/sbin/my_init"]
