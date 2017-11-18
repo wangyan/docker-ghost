@@ -3,8 +3,10 @@ set -xe
 
 if [ "$APT_MIRRORS" = "aliyun" ];then
     sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
-    npm  config set registry https://registry.npm.taobao.org
-    yarn config set registry https://registry.npm.taobao.org
+    yarn config set registry https://registry.npm.taobao.org --global
+    yarn config set disturl https://npm.taobao.org/dist --global
+    npm config set registry https://registry.npm.taobao.org --global
+    npm config set disturl https://npm.taobao.org/dist --global
 fi
 
 if [ "$MAIL" = "gmail" ];then
@@ -41,9 +43,6 @@ if [ "$MAIL" = "aliyun" ];then
     ghost config mail.options.secureConnection true
 fi
 
-mv $GHOST_INSTALL/content $GHOST_INSTALL/content.orig && \
-mkdir -p $GHOST_CONTENT
-
 baseDir="$GHOST_INSTALL/content.orig"
 for src in "$baseDir"/*/ "$baseDir"/themes/*; do
 	src="${src%/}"
@@ -55,7 +54,6 @@ for src in "$baseDir"/*/ "$baseDir"/themes/*; do
 done
 
 knex-migrator-migrate --init --mgpath "$GHOST_INSTALL/current"
-
 pm2 start current/index.js --name ghost
 
 exec "$@"

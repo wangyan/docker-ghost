@@ -1,0 +1,11 @@
+web:
+  container_name: 'ghost'
+  image: 'idiswy/ghost:latest'
+  restart: always
+  environment:
+    - APT_MIRRORS=aliyun
+    - MAIL=aliyun
+  ports:
+    - '80:80'
+  volumes:
+    - '/opt/ghost:/var/lib/ghost/content'
